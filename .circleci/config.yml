@@ -1,0 +1,29 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: technekes/circleci:latest
+
+    working_directory: /usr/src/app
+
+    steps:
+      - checkout
+      - setup_remote_docker
+
+      - run:
+          name: Build the image(s)
+          command: |
+            docker-compose build ci
+
+      - run:
+          name: Test and lint
+          command: |
+            docker-compose run ci npm run lint
+
+      - run:
+          name: Deploy
+          command: |
+            docker-compose run \
+              -e CI_BRANCH=$CIRCLE_BRANCH \
+              -e GH_TOKEN \
+              ci bin/release

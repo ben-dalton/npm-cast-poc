@@ -1,0 +1,13 @@
+version: '2.1'
+
+services:
+  ces-poc:
+    image: ces-poc
+    build: .
+    environment:
+      NODE_ENV: development
+    ports:
+      - 6007:6007
+      - 9229:9229
+    ## set your startup file here
+    command: node --inspect index.js

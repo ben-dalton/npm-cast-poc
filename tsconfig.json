@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "outDir": "lib",
+    "module": "ES2015",
+    "target": "es5",
+    "lib": ["es5", "es6", "es7", "es2017", "dom"],
+    "sourceMap": true,
+    "allowJs": false,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "rootDirs": ["src"],
+    "typeRoots": ["../node_modules/@types", "../@types"],
+    "baseUrl": "src",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "declaration": true,
+    "watch": false,
+    "resolveJsonModule": true
+  },
+  "linterOptions": {
+    "exclude": ["*.json", "**/*.json"]
+  },
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "scripts",
+    "**/*.css",
+    "*.json",
+    "**/*.json"
+  ]
+}

@@ -1,0 +1,7 @@
+node_modules
+dist
+lib*
+.cache
+.awcache
+.rpt2_cache
+.DS_Store
