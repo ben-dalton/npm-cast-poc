@@ -1,5 +1,18 @@
 import * as React from 'react';
-import { Alert } from '@tkxs/cast-ui/lib-esm';
+import { connect } from 'react-redux';
+import { Table } from '@tkxs/cast-ui/lib-esm';
+import * as actions from '../../actions/profileActions';
+
+const columns = [
+  {
+    Header: 'Company',
+    accessor: 'company.name',
+  },
+  {
+    Header: 'Contact',
+    accessor: 'name',
+  },
+];
 
 export type Props = {
   /**
@@ -7,19 +20,36 @@ export type Props = {
    *
    * @default null
    **/
+  users?: any[];
   entity?: any;
+  initializeProfile: () => void;
+  initialized?: boolean;
 };
 
-const Profile: React.FunctionComponent<Props> = ({ entity, ...props }) => (
-  <Alert alertStyle="primary" {...props}>
-    This is the profile of {entity.name}.
-  </Alert>
-);
+class Profile extends React.Component<Props> {
+  componentDidMount() {
+    this.props.initializeProfile();
+  }
+  render() {
+    return <Table columns={columns} data={this.props.users} />;
+  }
+  static defaultProps = {
+    entity: {
+      name: 'default within component',
+    },
+  };
+}
 
-Profile.defaultProps = {
-  entity: {
-    name: 'D. Fault',
-  },
+const mapStateToProps = (state: any) => {
+  const { profile } = state;
+  return {
+    users: profile.users,
+    error: profile.error,
+    async: profile.async,
+  };
 };
 
-export default Profile;
+export default connect(
+  mapStateToProps,
+  actions,
+)(Profile);

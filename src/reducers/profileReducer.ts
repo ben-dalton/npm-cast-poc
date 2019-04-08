@@ -7,14 +7,35 @@ type Action = {
 
 const initialState = {
   initialized: false,
+  entity: {
+    name: 'D. Fault',
+  },
 };
 
 const reducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case actionTypes.init:
       return {
-        ...state,
+        ...initialState,
         initialized: true,
+      };
+    case actionTypes.fetch_start:
+      return {
+        ...state,
+        async: true,
+      };
+    case actionTypes.fetch_complete:
+      return {
+        ...state,
+        users: action.payload.data,
+        async: false,
+      };
+    case actionTypes.fetch_error:
+      return {
+        ...state,
+        users: [],
+        async: false,
+        error: action.payload,
       };
     default:
       return state;

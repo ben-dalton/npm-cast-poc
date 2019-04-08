@@ -4,11 +4,9 @@ import { create } from '@storybook/theming';
 import { withKnobs } from '@storybook/addon-knobs/react';
 import { withInfo } from '@storybook/addon-info';
 
-// import configureStore from '../src/utils/configureStore';
-// import { defaultTheme, cobaltTheme } from '@tkxs/cast-ui/lib-cjs';
-// import { withThemesProvider } from 'storybook-addon-styled-component-theme';
-
-// const themes = [defaultTheme, cobaltTheme];
+import store from '../src/utils/configureStore';
+import { ThemeProvider, Themes } from '@tkxs/cast-ui/lib-es2015/themes';
+import { Provider } from 'react-redux';
 
 addParameters({
   options: {
@@ -28,7 +26,13 @@ addDecorator(
     source: true,
   }),
 );
-// addDecorator(withThemesProvider(themes));
+
+addDecorator(story => (
+  <Provider store={store}>
+    <ThemeProvider theme={Themes.cobaltTheme}>{story()}</ThemeProvider>
+  </Provider>
+));
+
 addDecorator(withKnobs);
 
 // automatically import all files ending in *.stories.tsx
